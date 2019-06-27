@@ -112,7 +112,7 @@ class TagFactory:
 TAGS = [Image, Input, Text, Link]
 
 if __name__ == '__main__':
-	# factory = TagFactory()
+	factory = TagFactory()
 	# elements = ('image', 'inp', 'a', 'a1', 'a2', 'a12', 'href', 'text', '')
 	# for el in elements:
 	# 	print(factory.create_tag(el))
