@@ -70,14 +70,15 @@ class Link(Tag):
 	NAME = 'a'
 	NAME_VARIABLES = ('href', 'a')
 
-	def __init__(self, name=None, content=''):
+	def __init__(self, name=None, content='', link=None):
+		self.link = link
 		if name is None:
 			name = self.NAME
 
 		super().__init__(name, content)
 
 	def __str__(self):
-		return super().__str__()
+		return f'<a href="{self.link}">{self.content}</a>'
 
 	def __repr__(self):
 		return super().__repr__()
