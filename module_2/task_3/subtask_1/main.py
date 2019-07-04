@@ -1,7 +1,6 @@
 import threading
 import random
 from time import sleep
-from queue import Queue
 
 
 def write(n):
@@ -13,17 +12,18 @@ def write(n):
 		sleep(write_time) 
 		print(f'\nThe writer #{n} wrote a new part in {write_time} seconds!\n')
 		wrt.release()
-		sleep(0.1)
+		sleep(0.5)
 		lock.set()
 
 	flag = False
-	print('WRITING STOPED')
+	print('WRITING STOPED\n')
 
 def read(n):
 	global flag
 
 	while flag:
 		lock.wait()
+		sleep(0.05 * n)
 		print(f'The reader #{n} read a new part!')
 		lock.clear()
 
