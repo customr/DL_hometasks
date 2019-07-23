@@ -1,0 +1,18 @@
+
+[ Server Started ]
+
+{'action': 'enter', 'time': '23:00:48', 'message': 'None', 'user': ['Max', 632]}
+{'action': 'msg', 'time': '23:00:51', 'message': 'hellp', 'user': ['Max', 632]}
+{'action': 'msg', 'time': '23:00:52', 'message': 'hello', 'user': ['Max', 632]}
+{'action': 'exit', 'time': '23:00:55', 'message': 'None', 'user': ['Max', 632]}
+{'action': 'enter', 'time': '23:01:15', 'message': 'None', 'user': ['Max', 796]}
+{'action': 'msg', 'time': '23:01:16', 'message': 'hi', 'user': ['Max', 796]}
+{'action': 'exit', 'time': '23:01:18', 'message': 'None', 'user': ['Max', 796]}
+{'action': 'enter', 'time': '23:02:09', 'message': 'None', 'user': ['Max', 388]}
+{'action': 'msg', 'time': '23:02:11', 'message': 'hi', 'user': ['Max', 388]}
+{'action': 'exit', 'time': '23:02:13', 'message': 'None', 'user': ['Max', 388]}
+
+ timed out
+
+[ Server Stoped ]
+------------------------------------------------------------------------------------------
