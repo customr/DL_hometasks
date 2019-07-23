@@ -54,6 +54,10 @@ class Client:
 			s (socket obj): socket of the client
 			rT (Thread obj): receiving thread
 		"""
+		assert isinstance(name, str), 'Name must be string'
+		assert all((isinstance(server, tuple), len(server)==2)), 'Address must be tuple'
+		assert all((isinstance(server[0], str), isinstance(server[1], int))), 'Wrong address'
+
 		self.name = name
 		self.server = server
 		self.id = random.randint(100, 999)
@@ -120,7 +124,10 @@ class Client:
 			msg (str): user message
 			addr (str): IPv4 address of the recipient
 		"""
-		
+		assert isinstance(action, str), 'Action must be string'
+		assert any((isinstance(msg, str), msg is None)), 'Message must be string or empty'
+		assert all((isinstance(addr, tuple), len(addr)==2, isinstance(addr[0], str), isinstance(addr[1], int))),'Wrong address'
+
 		#пришлось в такую длинную строку вынести
 		#т.к. тройные кавычки работали некорректно, а перенос слешэм вызывал ошибку c форматированной строкой
 		return self.s.sendto(('{'+f'"action":"{action}",\n"time":"{time.strftime("%H:%M:%S")}",\n"message":"{msg}",\n"user":["{self.name}", {self.id}]'+'}').encode('utf-8'), addr)
