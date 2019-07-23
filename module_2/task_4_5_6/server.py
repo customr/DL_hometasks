@@ -2,6 +2,7 @@ import socket
 import time
 import json
 import sys
+from log_config import log
 
 """UDPServer
 
@@ -25,6 +26,8 @@ s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.settimeout(TIMEOUT) #таймаут чтобы хост мог самовольно ликвидироваться если его не используют
 s.bind(SERVER)
 
+log.info('Server successfully started')
+
 help_info = 'Chat commands:\n\n/pm ID MESSAGE - write personal MESSAGE to the user with ID\n'
 help_info += '/exit - leave chat\n/getonline - get online ids\n/help - get commands\n'
 
@@ -34,7 +37,7 @@ while True:
 	try:
 		data, addr = s.recvfrom(1024)
 		data = json.loads(data.decode('utf-8'), encoding='utf-8') #преобразуем str в json
-
+		log.info('Received message')
 		#уведомление отправителю об успешном получении его сообщения
 		s.sendto(('\n>>> successfully received [202]\n\n').encode('utf-8'), addr)
 
@@ -81,9 +84,12 @@ while True:
 		else:
 			s.sendto((f'\n>>> unknown action type {data["action"]} [400]\n\n').encode('utf-8'), addr)
 
+		log.info('Send message backward')
+
 	except Exception as ex:
 		print('\n', ex)
-		print('\n[ Server Stoped ]\n' + '-'*90)
+		log.error(ex)
+		print('\n[ Server Stoped ]\n' + '-'*80)
 		break
 
 s.close()

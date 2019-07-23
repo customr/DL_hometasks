@@ -1,63 +1,63 @@
-Call func run((<__main__.Client object at 0x7f2f1420e0f0>,) / {})
- from <module>Returns None
-
-Call func sendjson((<__main__.Client object at 0x7f2f1420e0f0>, 'enter', None, ('localhost', 8080)) / {})
- from runReturns 76
-
-Call func sendjson((<__main__.Client object at 0x7f2f1420e0f0>, 'msg', 'hi', ('localhost', 8080)) / {})
- from runReturns 72
-
-Call func sendjson((<__main__.Client object at 0x7f2f1420e0f0>, 'exit', None, ('localhost', 8080)) / {})
- from runReturns 75
-
-Call func receiving((<__main__.Client object at 0x7f2f1420e0f0>,) / {})
- from runReturns None
-
-Call func run((<__main__.Client object at 0x7ff9222ac128>,) / {}) from <module>
+Call func run((<__main__.Client object at 0x7f7ee3135710>,) / {}) from <module> function
 Returns None
 
-Call func sendjson((<__main__.Client object at 0x7ff9222ac128>, 'enter', None, ('localhost', 8080)) / {}) from run
+Call func sendjson((<__main__.Client object at 0x7f7ee3135710>, 'enter', None, ('localhost', 8080)) / {}) from run function
 Returns 76
 
-Call func sendjson((<__main__.Client object at 0x7ff9222ac128>, 'msg', 'hi', ('localhost', 8080)) / {}) from run
-Returns 72
-
-Call func sendjson((<__main__.Client object at 0x7ff9222ac128>, 'exit', None, ('localhost', 8080)) / {}) from run
+Call func sendjson((<__main__.Client object at 0x7f7ee3135710>, 'help', None, ('localhost', 8080)) / {}) from run function
 Returns 75
 
-Call func receiving((<__main__.Client object at 0x7ff9222ac128>,) / {}) from run
-Returns None
+Call func sendjson((<__main__.Client object at 0x7f7ee3135710>, 'getonline', None, ('localhost', 8080)) / {}) from run function
+Returns 80
 
-Call func run((<__main__.Client object at 0x7f91b1444160>,) / {}) from <module> function
-Returns None
-
-Call func sendjson((<__main__.Client object at 0x7f91b1444160>, 'enter', None, ('localhost', 8080)) / {}) from run function
-Returns 76
-
-Call func sendjson((<__main__.Client object at 0x7f91b1444160>, 'msg', 'hi', ('localhost', 8080)) / {}) from run function
-Returns 72
-
-Call func sendjson((<__main__.Client object at 0x7f91b1444160>, 'exit', None, ('localhost', 8080)) / {}) from run function
+Call func sendjson((<__main__.Client object at 0x7f7ee3135710>, 'exit', None, ('localhost', 8080)) / {}) from run function
 Returns 75
 
-Call func receiving((<__main__.Client object at 0x7f91b1444160>,) / {}) from run function
+Call func receiving((<__main__.Client object at 0x7f7ee3135710>,) / {}) from run function
 Returns None
 
-Call func run((<__main__.Client object at 0x7f8feaa28160>,) / {}) from <module> function
+Call func run((<__main__.Client object at 0x7fa8bc410748>,) / {}) from <module> function
 Returns None
 
-Call func sendjson((<__main__.Client object at 0x7f8feaa28160>, 'enter', None, ('localhost', 8080)) / {}) from run function
-Returns 77
-
-Call func sendjson((<__main__.Client object at 0x7f8feaa28160>, 'msg', 'hello', ('localhost', 8080)) / {}) from run function
+Call func sendjson((<__main__.Client object at 0x7fa8bc410748>, 'enter', None, ('localhost', 8080)) / {}) from run function
 Returns 76
 
-Call func sendjson((<__main__.Client object at 0x7f8feaa28160>, 'getonline', None, ('localhost', 8080)) / {}) from run function
-Returns 81
+Call func sendjson((<__main__.Client object at 0x7fa8bc410748>, 'exit', None, ('localhost', 8080)) / {}) from run function
+Returns 75
 
-Call func sendjson((<__main__.Client object at 0x7f8feaa28160>, 'exit', None, ('localhost', 8080)) / {}) from run function
+Call func receiving((<__main__.Client object at 0x7fa8bc410748>,) / {}) from run function
+Returns None
+
+Call func run((<__main__.Client object at 0x7fd48aa355c0>,) / {}) from <module> function
+Returns None
+
+Call func sendjson((<__main__.Client object at 0x7fd48aa355c0>, 'enter', None, ('localhost', 8080)) / {}) from run function
 Returns 76
 
-Call func receiving((<__main__.Client object at 0x7f8feaa28160>,) / {}) from run function
+Call func sendjson((<__main__.Client object at 0x7fd48aa355c0>, 'exit', None, ('localhost', 8080)) / {}) from run function
+Returns 75
+
+Call func receiving((<__main__.Client object at 0x7fd48aa355c0>,) / {}) from run function
+Returns None
+
+Call func run((<__main__.Client object at 0x7f1238b595c0>,) / {}) from <module> function
+Returns None
+
+Call func sendjson((<__main__.Client object at 0x7f1238b595c0>, 'enter', None, ('localhost', 8080)) / {}) from run function
+Returns 76
+
+Call func sendjson((<__main__.Client object at 0x7f1238b595c0>, 'msg', 'g', ('localhost', 8080)) / {}) from run function
+Returns 71
+
+Call func sendjson((<__main__.Client object at 0x7f1238b595c0>, 'msg', 'hafd', ('localhost', 8080)) / {}) from run function
+Returns 74
+
+Call func sendjson((<__main__.Client object at 0x7f1238b595c0>, 'msg', 'dfg', ('localhost', 8080)) / {}) from run function
+Returns 73
+
+Call func sendjson((<__main__.Client object at 0x7f1238b595c0>, 'exit', None, ('localhost', 8080)) / {}) from run function
+Returns 75
+
+Call func receiving((<__main__.Client object at 0x7f1238b595c0>,) / {}) from run function
 Returns None
 

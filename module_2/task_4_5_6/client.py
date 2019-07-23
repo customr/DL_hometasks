@@ -4,6 +4,7 @@ import random
 import time
 import re
 import inspect
+from log_config import log
 
 
 SERVER = ('localhost', 8080) 
@@ -50,14 +51,16 @@ class Client:
 
 		Attributes:
 			id (int): ID of the client
-			s (socket): socket of the client
-			rT (thread): receiving thread
+			s (socket obj): socket of the client
+			rT (Thread obj): receiving thread
 		"""
 		self.name = name
 		self.server = server
 		self.id = random.randint(100, 999)
 		self.s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 		self.rT = threading.Thread(target=self.receiving, name='ReceiveThread')
+
+		log.info('Client successfully initialize')
 
 	@trace
 	def run(self):
@@ -69,6 +72,8 @@ class Client:
 		self.s.connect(('localhost', 0))
 		self.sendjson('enter', None, self.server)
 		self.rT.start()
+
+		log.info('Client have been start communicate')
 
 		while not self.shutdown:
 			try:
@@ -98,11 +103,13 @@ class Client:
 
 			except Exception as ex:
 				print('Error in sending:\t', ex)
+				log.error(ex)
 				self.shutdown = True
 				break
 
 		self.rT.join()
 		self.s.close()
+		log.info('Client died')
 
 	@trace
 	def sendjson(self, action, msg, addr):
@@ -113,6 +120,7 @@ class Client:
 			msg (str): user message
 			addr (str): IPv4 address of the recipient
 		"""
+		
 		#пришлось в такую длинную строку вынести
 		#т.к. тройные кавычки работали некорректно, а перенос слешэм вызывал ошибку c форматированной строкой
 		return self.s.sendto(('{'+f'"action":"{action}",\n"time":"{time.strftime("%H:%M:%S")}",\n"message":"{msg}",\n"user":["{self.name}", {self.id}]'+'}').encode('utf-8'), addr)
@@ -133,6 +141,7 @@ class Client:
 
 			except Exception as ex:
 				print('Error in receiving:\t', ex)
+				log.error(ex)
 				self.shutdown = True
 				return
 
