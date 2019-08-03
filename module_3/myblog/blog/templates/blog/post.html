@@ -7,6 +7,42 @@
     <title>Posts</title>
 </head>
 <body>
-
+<ul class='nav'>
+    <li class='nav'><a class='nav' href="{% url 'blog:index-page' %}">Blogs</a></li>
+    <li class='nav'><a class='nav' href="{% url 'blog:posts' %}">Posts</a></li>
+    <li class='nav'><a class='nav' href="{% url 'blog:authors' %}">Authors</a></li>
+    <li class='nav'><a class='nav' href="{% url 'blog:archive' %}">Archive</a></li>
+</ul>
+<p class='title'>Posts</p>
+<div>
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Author</th>
+				<th>Blog</th>
+				<th>Topic</th>
+				<th>Title</th>
+				<th>Content</th>
+				<th>Date published</th>
+				<th>Link</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for post in posts %}
+			<tr>
+				<th>{{ post.id }}</th>
+				<th>{{ post.author }}</th>
+				<th>{{ post.blog }}</th>
+				<th>{{ post.topic }}</th>
+				<th>{{ post.title }}</th>
+				<th>{{ post.text|slice:25 }}</th>
+				<th>{{ post.date_published }}</th>
+				<th><a href="{% url 'blog:post' post.id %}">Detail</a></th>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+</div>
 </body>
 </html>

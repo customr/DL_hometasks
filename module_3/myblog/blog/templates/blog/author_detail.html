@@ -64,7 +64,7 @@
 				<th>{{ post.blog }}</th>
 				<th>{{ post.topic }}</th>
 				<th>{{ post.title }}</th>
-				<th>{{ post.content }}</th>
+				<th>{{ post.text|slice:25 }}</th>
 				<th>{{ post.date_published }}</th>
 				<th><a href="{% url 'blog:post' author.id %}">Detail</a></th>
 			</tr>
