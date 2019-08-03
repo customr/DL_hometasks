@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'blog/content/style.css' %}">
+    <title>Authors</title>
+</head>
+<body>
+<ul class='nav'>
+    <li class='nav'><a class='nav' href="{% url 'blog:index-page' %}">Blogs</a></li>
+    <li class='nav'><a class='nav' href="{% url 'blog:posts' %}">Posts</a></li>
+    <li class='nav'><a class='nav' href="{% url 'blog:authors' %}">Authors</a></li>
+    <li class='nav'><a class='nav' href="{% url 'blog:archive' %}">Archive</a></li>
+</ul>
+<p class='title'>Authors</p>
+<div>
+	<table>
+		<thead>
+			<tr>
+				<th>First name</th>
+				<th>Last name</th>
+				<th>E-mail</th>
+				<th>Date of birth</th>
+				<th>Link</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for author in authors %}
+			<tr>
+				<th>{{ author.first_name }}</th>
+				<th>{{ author.last_name }}</th>
+				<th>{{ author.email }}</th>
+				<th>{{ author.date_of_birth }}</th>
+				<th><a href="{% url 'blog:author' author.id %}">Detail</a></th>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

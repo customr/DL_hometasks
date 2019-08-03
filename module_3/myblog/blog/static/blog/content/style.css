@@ -1,0 +1,149 @@
+@font-face {
+	font-family: 'gothic';
+	src: url('../fonts/gothic.ttf');
+}
+
+*{
+	font-family: 'gothic'
+}
+
+body{
+	background: #F6FFF6; 
+}
+
+h1{
+	font-size: 20px;
+}
+
+a {
+	outline: none;
+	text-decoration: none;
+	vertical-align: center;
+}
+
+a:link {
+	color: #AA00AA;
+	background: #BAE498;
+}
+
+a:visited {
+	color: #437A16;
+}
+
+a:focus {
+	border-bottom: 1px solid;
+	background: #BAE498;
+}
+
+a:hover {
+	border-bottom: 1px solid;     
+	background: #CDFEAA;
+}
+
+a:active {
+	background: #265301;
+ 	color: #CDFEAA;
+}
+
+
+
+
+table {
+	width: 100%;
+	background: #bfffe6;
+}
+
+thead th{
+	font-weight: bold;
+	font-size: 18px;
+	background: #a1ffda;
+	border-bottom: solid 2px black
+}
+
+tr:hover{
+	background: #80ffa2;
+}
+
+
+
+
+.author {
+	outline: none;
+	text-decoration: none;
+	vertical-align: center;
+}
+
+.author:link {
+	color: #AA00AA;
+	background: #FFFFFF;
+}
+
+.author:visited {
+	color: #437A16;
+}
+
+.author:focus {
+	border-bottom: 1px solid;
+	background: #BBAABB;
+}
+
+.author:hover {
+	border-bottom: 1px solid;     
+	background: #FFAF8A;
+}
+
+.author:active {
+	background: #265301;
+	color: #CDFEAA;
+}
+
+.list{
+	background: #F2F2F2;
+	text-align: left;
+}
+
+.title{	
+	top: 0;
+	width: 100%;
+	font-size: 35px;
+	line-height: 1.2;
+	background: #ffaf98;
+	text-align: center;
+}
+
+div.list a{
+	font-size: 20px;
+	margin-left: 15px; 
+}
+
+a.nav {
+	font-size: 20px;
+	background: unset;
+}
+
+ul.nav {
+	top: 0;
+	width: 100%;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #555;
+}
+
+li.nav {
+	float: left;
+	border: solid 1px black;
+}
+
+li.nav a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 5px 70px;
+	text-decoration: none;
+}
+
+li.nav a:hover {
+	background-color: #111;
+}

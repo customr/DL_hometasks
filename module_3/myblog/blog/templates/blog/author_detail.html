@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'blog/content/style.css' %}">
+    <title>Author {{ author.first_name }} {{ author.last_name }}</title>
+</head>
+<body>
+<ul class='nav'>
+    <li class='nav'><a class='nav' href="{% url 'blog:index-page' %}">Blogs</a></li>
+    <li class='nav'><a class='nav' href="{% url 'blog:posts' %}">Posts</a></li>
+    <li class='nav'><a class='nav' href="{% url 'blog:authors' %}">Authors</a></li>
+    <li class='nav'><a class='nav' href="{% url 'blog:archive' %}">Archive</a></li>
+</ul>
+<div>
+	<h1>First name: {{ author.first_name }}</h1>
+	<h1>Last name: {{ author.last_name }}</h1>
+	<h1>E-mail: {{ author.email }}</h1>
+	<h1>Date of birth: {{ author.date_of_birth }}</h1>
+</div>
+<p class='title'>Author's blogs</p>
+<div>
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Rating</th>
+				<th>Link</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for blog in blogs %}
+			<tr>
+				<th>{{ blog.id }}</th>
+				<th>{{ blog.name }}</th>
+				<th>{{ blog.rating }}</th>
+				<th><a href="{% url 'blog:blog' blog.id %}">Detail</a></th>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+<p class='title'>Author's posts</p>
+<div>
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Blog</th>
+				<th>Topic</th>
+				<th>Title</th>
+				<th>Content</th>
+				<th>Date published</th>
+				<th>Link</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for post in posts %}
+			<tr>
+				<th>{{ post.id }}</th>
+				<th>{{ post.blog }}</th>
+				<th>{{ post.topic }}</th>
+				<th>{{ post.title }}</th>
+				<th>{{ post.content }}</th>
+				<th>{{ post.date_published }}</th>
+				<th><a href="{% url 'blog:post' author.id %}">Detail</a></th>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

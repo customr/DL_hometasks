@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'blog/content/archive.css' %}">
+    <title>Archive</title>
+</head>
+<body>
+<table>
+    <thead>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>E-mail</th>
+            <th>Title</th>
+            <th>Date published</th>
+            <th>Rating</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for post in posts %}
+            <tr>
+                <th>{{ post.author.first_name }}</th>
+                <th>{{ post.author.last_name }}</th>
+                <th>{{ post.author.email }}</th>
+                <th>{{ post.title }}</th>
+                <th>{{ post.date_published }}</th>
+                <th>{{ post.rating }}</th>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>

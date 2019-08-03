@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'blog/content/style.css' %}">
+    <title>Antihabr</title>
+</head>
+<body>
+<ul class='nav'>
+    <li class='nav'><a class='nav' href="{% url 'blog:index-page' %}">Blogs</a></li>
+    <li class='nav'><a class='nav' href="{% url 'blog:posts' %}">Posts</a></li>
+    <li class='nav'><a class='nav' href="{% url 'blog:authors' %}">Authors</a></li>
+    <li class='nav'><a class='nav' href="{% url 'blog:archive' %}">Archive</a></li>
+</ul>
+<p class='title'>Blogs</p>
+{% if blogs %}  
+    {% for blog in blogs %}
+        <div class='list'>
+            <a href="{% url 'blog:blog' blog.id %}">{{ blog.name }}</a>
+            <a class=author href="{% url 'blog:author' blog.author.id %}">Author: {{ blog.author }}</a>
+            <hr>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No blogs</p>
+{% endif %}
+</body>
+</html>
