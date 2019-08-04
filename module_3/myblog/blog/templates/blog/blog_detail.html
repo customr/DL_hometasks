@@ -4,9 +4,48 @@
     {% load staticfiles %}
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'blog/content/style.css' %}">
-    <title>Blog {{ blog.id }}</title>
+    <title>Blogs</title>
 </head>
 <body>
-
+<ul class='nav'>
+    <li class='nav'><a class='nav' href="{% url 'blog:index-page' %}">Blogs</a></li>
+    <li class='nav'><a class='nav' href="{% url 'blog:posts' %}">Posts</a></li>
+    <li class='nav'><a class='nav' href="{% url 'blog:authors' %}">Authors</a></li>
+    <li class='nav'><a class='nav' href="{% url 'blog:help' %}">Help</a></li>
+</ul>
+<div>
+	<h1>Blog name: {{ blog.name }}</h1>
+	<h1>Blog author: <a href="{% url 'blog:author' blog.author.id %}">{{ blog.author }}</a></h1>
+	<h1>Rating: {{ blog.rating }}</h1>
+</div>
+<p class='title'>Blog posts</p>
+<div>
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Blog</th>
+				<th>Topic</th>
+				<th>Title</th>
+				<th>Content</th>
+				<th>Date published</th>
+				<th>Link</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for post in posts %}
+			<tr>
+				<th>{{ post.id }}</th>
+				<th>{{ post.blog }}</th>
+				<th>{{ post.topic }}</th>
+				<th>{{ post.title }}</th>
+				<th>{{ post.text|slice:25 }}</th>
+				<th>{{ post.date_published }}</th>
+				<th><a href="{% url 'blog:post' post.id %}">Detail</a></th>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+</div>
 </body>
 </html>

@@ -4,7 +4,7 @@
     {% load staticfiles %}
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'blog/content/style.css' %}">
-    <title>Authors</title>
+    <title>Antihabr</title>
 </head>
 <body>
 <ul class='nav'>
@@ -13,30 +13,21 @@
     <li class='nav'><a class='nav' href="{% url 'blog:authors' %}">Authors</a></li>
     <li class='nav'><a class='nav' href="{% url 'blog:help' %}">Help</a></li>
 </ul>
-<p class='title'>Authors</p>
-<div>
-	<table>
-		<thead>
-			<tr>
-				<th>First name</th>
-				<th>Last name</th>
-				<th>E-mail</th>
-				<th>Date of birth</th>
-				<th>Link</th>
-			</tr>
-		</thead>
-		<tbody>
-		{% for author in authors %}
-			<tr>
-				<th>{{ author.first_name }}</th>
-				<th>{{ author.last_name }}</th>
-				<th>{{ author.email }}</th>
-				<th>{{ author.date_of_birth }}</th>
-				<th><a href="{% url 'blog:author' author.id %}">Detail</a></th>
-			</tr>
-		{% endfor %}
-		</tbody>
-	</table>
-</div>
+<p class='title'>Routes</p>
+<ul>
+    <li><b>/</b> - all blogs</li>
+    <br>
+    <li><b>/blog/>blog_name<</b> - blog "blog_name"</li>
+    <br>
+    <li><b>/posts/</b> - all posts</li>
+    <br>
+    <li><b>/posts/topic/>topic_name<</b> - all posts by topic</li>
+    <br>
+    <li><b>/post/>post_id<</b> - detailed post by id</li>
+    <br>
+    <li><b>/authors/</b> - all authors</li>
+    <br>
+    <li><b>/authors/>author_id<</b> - detailed author information</li>
+</ul>
 </body>
 </html>

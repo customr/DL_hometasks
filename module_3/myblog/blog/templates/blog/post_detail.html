@@ -7,6 +7,20 @@
     <title>{{ post.title }}</title>
 </head>
 <body>
-
+<ul class='nav'>
+    <li class='nav'><a class='nav' href="{% url 'blog:index-page' %}">Blogs</a></li>
+    <li class='nav'><a class='nav' href="{% url 'blog:posts' %}">Posts</a></li>
+    <li class='nav'><a class='nav' href="{% url 'blog:authors' %}">Authors</a></li>
+    <li class='nav'><a class='nav' href="{% url 'blog:help' %}">Help</a></li>
+</ul>
+<p class='title'>{{ post.title }}</p>
+<div>
+	<b>{{ post.text }}</b>
+	<hr>
+	<small>
+		{{ post.date_published }} 
+		<a href="{% url 'blog:author' post.author.id %}">AUTHOR</a>
+	</small>
+</div>
 </body>
 </html>

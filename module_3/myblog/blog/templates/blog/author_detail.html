@@ -11,7 +11,7 @@
     <li class='nav'><a class='nav' href="{% url 'blog:index-page' %}">Blogs</a></li>
     <li class='nav'><a class='nav' href="{% url 'blog:posts' %}">Posts</a></li>
     <li class='nav'><a class='nav' href="{% url 'blog:authors' %}">Authors</a></li>
-    <li class='nav'><a class='nav' href="{% url 'blog:archive' %}">Archive</a></li>
+    <li class='nav'><a class='nav' href="{% url 'blog:help' %}">Help</a></li>
 </ul>
 <div>
 	<h1>First name: {{ author.first_name }}</h1>
@@ -36,7 +36,7 @@
 				<th>{{ blog.id }}</th>
 				<th>{{ blog.name }}</th>
 				<th>{{ blog.rating }}</th>
-				<th><a href="{% url 'blog:blog' blog.id %}">Detail</a></th>
+				<th><a href="{% url 'blog:blog' blog.name %}">Detail</a></th>
 			</tr>
 		{% endfor %}
 		</tbody>
