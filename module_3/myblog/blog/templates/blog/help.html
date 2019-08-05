@@ -15,19 +15,19 @@
 </ul>
 <p class='title'>Routes</p>
 <ul>
-    <li><b>/</b> - all blogs</li>
+    <a href="{% url 'blog:index-page' %}"><li class='list'><b>/</b> - all blogs</li></a>
     <br>
-    <li><b>/blog/>blog_name<</b> - blog "blog_name"</li>
+    <a href="{% url 'blog:blog' blog %}"><li class='list'><b>/blog/>blog_name<</b> - blog "blog_name"</li></a>
     <br>
-    <li><b>/posts/</b> - all posts</li>
+    <a href="{% url 'blog:posts' %}"><li class='list'><b>/posts/</b> - all posts</li></a>
     <br>
-    <li><b>/posts/topic/>topic_name<</b> - all posts by topic</li>
+    <a href="{% url 'blog:posts_topic' topic %}"><li class='list'><b>/posts/topic/>topic_name<</b> - all posts by topic</li></a>
     <br>
-    <li><b>/post/>post_id<</b> - detailed post by id</li>
+    <a href="{% url 'blog:post' post %}"><li class='list'><b>/post/>post_id<</b> - detailed post by id</li></a>
     <br>
-    <li><b>/authors/</b> - all authors</li>
+    <a href="{% url 'blog:authors' %}"><li class='list'><b>/authors/</b> - all authors</li></a>
     <br>
-    <li><b>/authors/>author_id<</b> - detailed author information</li>
+    <a href="{% url 'blog:author' author %}"><li class='list'><b>/authors/>author_id<</b> - detailed author information</li></a>
 </ul>
 </body>
 </html>

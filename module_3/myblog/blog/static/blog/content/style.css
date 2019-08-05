@@ -68,6 +68,7 @@ tr:hover{
 
 
 .author {
+	float: right;
 	outline: none;
 	text-decoration: none;
 	vertical-align: center;
@@ -102,6 +103,15 @@ tr:hover{
 	text-align: left;
 }
 
+.list:hover{
+	background: #E9E9D1;
+}
+
+ul.list a {
+    color: inherit;
+    text-decoration: none;
+}
+
 .title{	
 	top: 0;
 	width: 100%;
@@ -133,6 +143,7 @@ ul.nav {
 
 li.nav {
 	float: left;
+	text-align: center;
 	border: solid 1px white;
 }
 

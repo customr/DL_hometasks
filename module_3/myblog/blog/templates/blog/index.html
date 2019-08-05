@@ -7,12 +7,14 @@
     <title>Antihabr</title>
 </head>
 <body>
-<ul class='nav'>
-    <li class='nav'><a class='nav' href="{% url 'blog:index-page' %}">Blogs</a></li>
-    <li class='nav'><a class='nav' href="{% url 'blog:posts' %}">Posts</a></li>
-    <li class='nav'><a class='nav' href="{% url 'blog:authors' %}">Authors</a></li>
-    <li class='nav'><a class='nav' href="{% url 'blog:help' %}">Help</a></li>
-</ul>
+<div>
+    <ul class='nav'>
+        <li class='nav'><a class='nav' href="{% url 'blog:index-page' %}">Blogs</a></li>
+        <li class='nav'><a class='nav' href="{% url 'blog:posts' %}">Posts</a></li>
+        <li class='nav'><a class='nav' href="{% url 'blog:authors' %}">Authors</a></li>
+        <li class='nav'><a class='nav' href="{% url 'blog:help' %}">Help</a></li>
+    </ul>
+</div>
 <p class='title'>Blogs</p>
 {% if blogs %}  
     {% for blog in blogs %}

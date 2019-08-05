@@ -54,4 +54,14 @@ def get_authors(request):
 	return render(request, 'blog/author.html', context)
 
 def help(request):
-	return render(request, 'blog/help.html', {})
+	blog = Blog.objects.order_by("?").first()
+	post = Post.objects.order_by("?").first()
+	topic = post.topic
+	author = post.author.id
+	context = {
+		'blog': blog.name,
+		'post': post.id,
+		'topic': topic,
+		'author': author
+	}
+	return render(request, 'blog/help.html', context)
