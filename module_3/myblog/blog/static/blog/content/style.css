@@ -60,6 +60,10 @@ thead th{
 	border-bottom: solid 2px black
 }
 
+th{
+	border-bottom: solid 1px #dddddd;
+}
+
 tr:hover{
 	background: #80ffa2;
 }
@@ -122,11 +126,13 @@ ul.list a {
 }
 
 .title{	
+	margin-top: 5px;
 	top: 0;
 	width: 100%;
 	font-size: 35px;
 	line-height: 1.2;
-	background: #ff8e4c;
+	background: #ffde38;
+	color: #333;
 	text-align: center;
 }
 
