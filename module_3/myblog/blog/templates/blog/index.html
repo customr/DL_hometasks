@@ -18,14 +18,16 @@
 <p class='title'>Blogs</p>
 {% if blogs %}  
     {% for blog in blogs %}
-        <div class='list'>
-            <a href="{% url 'blog:blog' blog.name %}">{{ blog.name }}</a>
-            <a class=author href="{% url 'blog:author' blog.author.id %}">Author: {{ blog.author }}</a>
-            <hr>
+        <div class='list' onclick="location.href='{% url 'blog:blog' blog.name %}'">
+            <li>
+                <a href="{% url 'blog:blog' blog.name %}">{{ blog.name }}</a>
+                <a class=author href="{% url 'blog:author' blog.author.id %}">Author: {{ blog.author }}</a>
+                <hr>
+            </li>
         </div>
     {% endfor %}
 {% else %}
-    <p>No blogs</p>
+    <p class='title'>No blogs</p>
 {% endif %}
 </body>
 </html>
