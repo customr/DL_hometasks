@@ -13,7 +13,7 @@ def index(request):
 
 def blog(request, blog_name):
 	blog = get_object_or_404(Blog, name__iexact=blog_name)
-	posts = Post.objects.all().filter(blog=blog)
+	posts = blog.post_set.get_queryset()
 	context = {
 		'blog': blog,
 		'posts': posts
@@ -38,8 +38,8 @@ def get_posts(request, topic=None):
 
 def author(request, author_id):
 	author = get_object_or_404(Author, pk=author_id)
-	blogs = Blog.objects.all().filter(author=author)
-	posts = Post.objects.all().filter(author=author)
+	blogs = Blog.objects.filter(author=author)
+	posts = Post.objects.filter(author=author)
 
 	context = {
 		'author': author,
