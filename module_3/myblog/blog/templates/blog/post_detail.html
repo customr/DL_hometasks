@@ -1,26 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% load staticfiles %}
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="{% static 'blog/content/style.css' %}">
-    <title>{{ post.title }}</title>
-</head>
-<body>
-<ul class='nav'>
-    <li class='nav'><a class='nav' href="{% url 'blog:index-page' %}">Blogs</a></li>
-    <li class='nav'><a class='nav' href="{% url 'blog:posts' %}">Posts</a></li>
-    <li class='nav'><a class='nav' href="{% url 'blog:authors' %}">Authors</a></li>
-    <li class='nav'><a class='nav' href="{% url 'blog:help' %}">Help</a></li>
-</ul>
+{% extends 'blog/base.html' %}
+
+{% block title%}
+Author {{author.first_name}}{{author.last_name}}
+{% endblock title %}
+
+{% block content %}
 <p class='title'>{{ post.title }}</p>
 <div>
 	<b>{{ post.text }}</b>
 	<hr>
+	<form action="" method="post">{% csrf_token %}
+		{{ form.as_p }}
+		<input type="submit" value="OK"/>
+	</form>
 	<small>
 		{{ post.date_published }} 
 		<a href="{% url 'blog:author' post.author.id %}">AUTHOR</a>
 	</small>
 </div>
-</body>
-</html>
+{% endblock content %}

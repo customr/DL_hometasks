@@ -1,18 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% load staticfiles %}
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="{% static 'blog/content/style.css' %}">
-    <title>Authors</title>
-</head>
-<body>
-<ul class='nav'>
-    <li class='nav'><a class='nav' href="{% url 'blog:index-page' %}">Blogs</a></li>
-    <li class='nav'><a class='nav' href="{% url 'blog:posts' %}">Posts</a></li>
-    <li class='nav'><a class='nav' href="{% url 'blog:authors' %}">Authors</a></li>
-    <li class='nav'><a class='nav' href="{% url 'blog:help' %}">Help</a></li>
-</ul>
+{% extends 'blog/base.html' %}
+
+{% block title%}
+Authors
+{% endblock title %}
+
+{% block content %}
 <p class='title'>Authors</p>
 <div>
 	<table>
@@ -38,5 +30,4 @@
 		</tbody>
 	</table>
 </div>
-</body>
-</html>
+{% endblock content %}

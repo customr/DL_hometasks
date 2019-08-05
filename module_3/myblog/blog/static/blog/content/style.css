@@ -11,10 +11,6 @@ body{
 	background: #F6FFF6; 
 }
 
-h1{
-	font-size: 20px;
-}
-
 a {
 	outline: none;
 	text-decoration: none;
@@ -69,6 +65,73 @@ tr:hover{
 }
 
 
+a.nav {
+	font-size: 20px;
+	background: unset;
+}
+
+ul.nav {
+	top: 0;
+	width: 100%;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #5a8ac5;
+}
+
+li.nav {
+	float: left;
+	text-align: center;
+	border: solid 1px white;
+}
+
+li.nav a {
+	display: block;
+	color: #9dff00;
+	text-align: center;
+	padding: 5px 70px;
+	text-decoration: none;
+}
+
+li.nav a:hover {
+	background-color: #111;
+}
+
+
+a.actions {
+	font-size: 15px;
+	background: unset;
+}
+
+ul.actions {
+	top: 0;
+	width: 100%;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: unset;
+}
+
+li.actions {
+	float: left;
+	text-align: center;
+	border: solid 1px white;
+}
+
+li.actions a {
+	display: block;
+	color: black;
+	text-align: center;
+	padding: 5px 10px;
+	margin: 0px 15px;
+	text-decoration: none;
+}
+
+li.actions a:hover {
+	background-color: #ddd;
+}
 
 
 .author {
@@ -142,35 +205,3 @@ div.list a{
 	margin-left: 15px; 
 }
 
-a.nav {
-	font-size: 20px;
-	background: unset;
-}
-
-ul.nav {
-	top: 0;
-	width: 100%;
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	background-color: #5a8ac5;
-}
-
-li.nav {
-	float: left;
-	text-align: center;
-	border: solid 1px white;
-}
-
-li.nav a {
-	display: block;
-	color: #9dff00;
-	text-align: center;
-	padding: 5px 70px;
-	text-decoration: none;
-}
-
-li.nav a:hover {
-	background-color: #111;
-}

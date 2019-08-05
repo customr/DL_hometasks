@@ -1,9 +1,24 @@
-import datetime
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.utils import timezone
+from django.views.generic.edit import CreateView
 
 from blog.models import Author, Blog, Post
+
+class NewAuthor(CreateView):
+	model = Author
+	template_name = 'blog/new_author.html'
+	fields = ['first_name', 'last_name', 'email', 'date_of_birth']
+
+class NewBlog(CreateView):
+	model = Blog
+	template_name = 'blog/new_blog.html'
+	fields = ['author', 'name']
+
+class NewPost(CreateView):
+	model = Post
+	template_name = 'blog/new_post.html'
+	fields = ['blog', 'author', 'topic', 'title', 'text']
 
 
 def index(request):

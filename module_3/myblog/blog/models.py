@@ -1,6 +1,6 @@
-import datetime
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
 
 
 class Author(models.Model):
@@ -12,6 +12,9 @@ class Author(models.Model):
 	def __str__(self):
 		return f'#{self.id} {self.first_name} {self.last_name}'
 
+	def get_absolute_url(self):
+		return reverse('blog:author', args=[str(self.id)])
+
 
 class Blog(models.Model):
 	author = models.ForeignKey(Author, on_delete=models.CASCADE)
@@ -20,6 +23,9 @@ class Blog(models.Model):
 
 	def __str__(self):
 		return self.name
+
+	def get_absolute_url(self):
+		return reverse('blog:blog', args=[str(self.name)])
 
 
 class Post(models.Model):
@@ -37,3 +43,6 @@ class Post(models.Model):
 
 	def __str__(self):
 		return f'#{self.id} {self.title}'
+
+	def get_absolute_url(self):
+		return reverse('blog:post', args=[str(self.id)])

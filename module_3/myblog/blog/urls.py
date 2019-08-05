@@ -13,4 +13,7 @@ urlpatterns = [
 	path('author/<int:author_id>/', views.author, name='author'),
 	path('authors/', views.get_authors, name='authors'),
 	path('help/', views.help, name='help'),
+	path('newpost/', views.NewPost.as_view(), name='new_post'),
+	path('newblog/', views.NewBlog.as_view(), name='new_blog'),
+	path('newauthor/', views.NewAuthor.as_view(), name='new_author')
 ]

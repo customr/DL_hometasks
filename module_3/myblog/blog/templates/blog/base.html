@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'blog/content/style.css' %}">
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+<header>
+	<div class='nav'>
+		<ul class='nav'>
+		    <li class='nav'><a class='nav' href="{% url 'blog:index-page' %}">Blogs</a></li>
+		    <li class='nav'><a class='nav' href="{% url 'blog:posts' %}">Posts</a></li>
+		    <li class='nav'><a class='nav' href="{% url 'blog:authors' %}">Authors</a></li>
+		    <li class='nav'><a class='nav' href="{% url 'blog:help' %}">Help</a></li>
+		</ul>
+		{% block navigation %}
+		{% endblock navigation %}
+	</div>
+	<div class='actions'>
+		<ul class='actions'>
+			<li class='actions'><a class='actions' href="{% url 'blog:new_post' %}">new post</a></li>
+			<li class='actions'><a class='actions' href="{% url 'blog:new_blog' %}">new blog</a></li>
+			<li class='actions'><a class='actions' href="{% url 'blog:new_author' %}">register</a></li>
+		</ul>
+	</div>
+</header>
+<body>
+{% block content %}
+{% endblock content %}
+</body>
+</html>
