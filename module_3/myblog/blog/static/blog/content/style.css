@@ -51,6 +51,7 @@ a:active {
 table {
 	width: 100%;
 	background: #c1ffe7;
+	overflow: auto;
 }
 
 thead th{
@@ -72,6 +73,9 @@ tr:hover{
 a.nav {
 	font-size: 20px;
 	background: unset;
+	text-decoration: none;
+	list-style-type: none;
+	overflow: hidden;
 }
 
 ul.nav {

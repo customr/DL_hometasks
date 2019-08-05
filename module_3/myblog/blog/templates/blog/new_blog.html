@@ -6,7 +6,7 @@ New blog
 
 {% block content %}
 <p class='title'>Create new blog</p>
-<form action="" method="post">{% csrf_token %}
+<form action="post" method="post">{% csrf_token %}
 	{{ form.as_p }}
 	<input type="submit" value="Save"/>
 </form>

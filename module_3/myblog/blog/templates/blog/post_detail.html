@@ -9,10 +9,6 @@ Author {{author.first_name}}{{author.last_name}}
 <div>
 	<b>{{ post.text }}</b>
 	<hr>
-	<form action="" method="post">{% csrf_token %}
-		{{ form.as_p }}
-		<input type="submit" value="OK"/>
-	</form>
 	<small>
 		{{ post.date_published }} 
 		<a href="{% url 'blog:author' post.author.id %}">AUTHOR</a>

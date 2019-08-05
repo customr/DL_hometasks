@@ -15,5 +15,5 @@ urlpatterns = [
 	path('help/', views.help, name='help'),
 	path('newpost/', views.NewPost.as_view(), name='new_post'),
 	path('newblog/', views.NewBlog.as_view(), name='new_blog'),
-	path('newauthor/', views.NewAuthor.as_view(), name='new_author')
+	path('newauthor/', views.NewAuthor.as_view(), name='new_author'),
 ]
