@@ -20,5 +20,11 @@ Author {{author.first_name}}{{author.last_name}}
     <a href="{% url 'blog:authors' %}"><li class='list'><b>/authors/</b> - all authors</li></a>
     <br>
     <a href="{% url 'blog:author' author %}"><li class='list'><b>/authors/>author_id<</b> - detailed author information</li></a>
+    <br>
+    <a href="{% url 'blog:new_author' %}"><li class='list'><b>/newauthor/</b> - register new author</li></a>
+    <br>
+    <a href="{% url 'blog:new_blog' %}"><li class='list'><b>/newblog/</b> - create new blog</li></a>
+    <br>
+    <a href="{% url 'blog:new_post' %}"><li class='list'><b>/newpost/</b> - create new post</li></a>
 </ul>
 {% endblock content %}

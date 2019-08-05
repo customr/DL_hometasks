@@ -11,6 +11,10 @@ body{
 	background: #F6FFF6; 
 }
 
+h1{
+	font-size: 20px;
+}
+
 a {
 	outline: none;
 	text-decoration: none;
@@ -81,6 +85,7 @@ ul.nav {
 }
 
 li.nav {
+	width: 19.8%;
 	float: left;
 	text-align: center;
 	border: solid 1px white;
@@ -112,9 +117,11 @@ ul.actions {
 	padding: 0;
 	overflow: hidden;
 	background-color: unset;
+	border-bottom: solid 1px gray;
 }
 
 li.actions {
+	width: 19.8%;
 	float: left;
 	text-align: center;
 	border: solid 1px white;
@@ -124,13 +131,31 @@ li.actions a {
 	display: block;
 	color: black;
 	text-align: center;
-	padding: 5px 10px;
-	margin: 0px 15px;
+	padding: 5px 0px;
+	margin: 0px 0px;
 	text-decoration: none;
 }
 
 li.actions a:hover {
 	background-color: #ddd;
+}
+
+#auth{
+	width: 10%;
+	background-color: #ddd;
+	float: right;
+}
+
+#auth a{
+	padding: 5px 10px;
+}
+
+#auth li{
+	width: 100%;
+}
+
+#auth a:hover{
+	background-color: #bbb;
 }
 
 
