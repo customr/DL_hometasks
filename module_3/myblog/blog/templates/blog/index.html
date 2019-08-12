@@ -5,8 +5,8 @@ Author {{author.first_name}}{{author.last_name}}
 {% endblock title %}
 
 {% block content %}
-<p class='title'>Blogs</p>
 {% if blogs %}  
+    <p class='title'>Blogs</p>
     {% for blog in blogs %}
         <div class='list' onclick="location.href='{% url 'blog:blog' blog.name %}'">
             <li>
@@ -17,6 +17,6 @@ Author {{author.first_name}}{{author.last_name}}
         </div>
     {% endfor %}
 {% else %}
-    <p class='title'>No blogs</p>
+    <p class='title'>No blogs yet</p>
 {% endif %}
 {% endblock content %}

@@ -10,8 +10,29 @@ Author {{author.first_name}}{{author.last_name}}
 	<b>{{ post.text }}</b>
 	<hr>
 	<small>
-		{{ post.date_published }} 
-		<a href="{% url 'blog:author' post.author.id %}">AUTHOR</a>
+		{{ post.date_published }}
+		<li>
+			<a href="{% url 'blog:author' post.author.id %}">AUTHOR</a>
+		</li>
 	</small>
+</div>
+{% if user.is_authenticated %}
+	<form action="" method="post">{% csrf_token %}
+		{{ form.as_p }}
+		<input type="submit" value="Save"/>
+	</form>
+{% endif %}
+<div>
+	<ul>
+		{% for comment in comments %}
+			<li>
+				<li>
+					<a href="{% url 'blog:author' comment.author.id %}">{{ comment.author }}</a>
+					{{ comment.date_published }}
+				</li>
+				{{ comment.text }}
+			</li>
+		{% endfor %}
+	</ul>
 </div>
 {% endblock content %}

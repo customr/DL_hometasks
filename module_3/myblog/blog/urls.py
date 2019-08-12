@@ -16,4 +16,8 @@ urlpatterns = [
 	path('newpost/', views.NewPost.as_view(), name='new_post'),
 	path('newblog/', views.NewBlog.as_view(), name='new_blog'),
 	path('newauthor/', views.NewAuthor.as_view(), name='new_author'),
+	path('register/', views.RegisterFormView.as_view(), name='register'),
+	#````````````````````````ACTIONS```````````````````````````
+	path('post/<int:post_id>/like', views.like_post, name='like_post'),
+	path('post/<int:post_id>_<int:comment_id>/like', views.like_comment, name='like_comment'),
 ]
