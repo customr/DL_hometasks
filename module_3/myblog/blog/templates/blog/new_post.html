@@ -6,8 +6,8 @@ New post
 
 {% block content %}
 <p class='title'>Create new post</p>
-<form action="" method="post">{% csrf_token %}
-	{{ form.as_p }}
-	<input type="submit" value="Save"/>
+<form method="POST">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
 </form>
 {% endblock content %}

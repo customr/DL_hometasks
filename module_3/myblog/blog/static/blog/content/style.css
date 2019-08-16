@@ -4,6 +4,7 @@
 }
 
 *{
+
 	font-family: 'gothic'
 }
 
@@ -34,12 +35,12 @@ a {
 }
 
 a:link {
-	color: #78ff81;
+	color: black;
 	background: #51f065;
 }
 
 a:visited {
-	color: #437A16;
+	color: purple;
 }
 
 a:focus {
@@ -230,8 +231,7 @@ ul.list a {
 }
 
 .title{	
-	margin-top: 5px;
-	top: 0;
+	margin-top: 25px;
 	width: 100%;
 	font-size: 35px;
 	line-height: 1.2;
@@ -248,4 +248,14 @@ div.list a{
 a.like:hover{
 	background: red;
 	color: white;
+}
+
+#comment{
+	background: white;
+	margin: 0;
+	padding: 0;
+}
+
+#post{
+	background: #fffed4;
 }

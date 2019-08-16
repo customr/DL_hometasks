@@ -1,15 +1,16 @@
 {% extends 'blog/base.html' %}
 
 {% block title%}
-Authors
+Users
 {% endblock title %}
 
 {% block content %}
-<p class='title'>Authors</p>
+<p class='title'>Users</p>
 <div>
 	<table>
 		<thead>
 			<tr>
+				<th>Username</th>
 				<th>First name</th>
 				<th>Last name</th>
 				<th>E-mail</th>
@@ -18,13 +19,14 @@ Authors
 			</tr>
 		</thead>
 		<tbody>
-		{% for author in authors %}
+		{% for thisuser in users %}
 			<tr>
-				<th>{{ author.first_name }}</th>
-				<th>{{ author.last_name }}</th>
-				<th>{{ author.email }}</th>
-				<th>{{ author.date_of_birth }}</th>
-				<th><a href="{% url 'blog:author' author.id %}">Detail</a></th>
+				<th>{{ thisuser.username }}</th>
+				<th>{{ thisuser.first_name }}</th>
+				<th>{{ thisuser.last_name }}</th>
+				<th>{{ thisuser.email }}</th>
+				<th>{{ thisuser.date_of_birth }}</th>
+				<th><a href="{% url 'blog:user' thisuser.id %}">Detail</a></th>
 			</tr>
 		{% endfor %}
 		</tbody>

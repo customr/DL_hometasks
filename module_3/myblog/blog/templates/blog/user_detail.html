@@ -1,17 +1,18 @@
 {% extends 'blog/base.html' %}
 
 {% block title%}
-Author {{author.first_name}}{{author.last_name}}
+User {{thisuser.first_name}} {{thisuser.last_name}}
 {% endblock title %}
 
 {% block content %}
 <div>
-	<h1>First name: {{ author.first_name }}</h1>
-	<h1>Last name: {{ author.last_name }}</h1>
-	<h1>E-mail: {{ author.email }}</h1>
-	<h1>Date of birth: {{ author.date_of_birth }}</h1>
+	<h1>Username: {{ thisuser.username }}</h1>
+	<h1>First name: {{ thisuser.first_name }}</h1>
+	<h1>Last name: {{ thisuser.last_name }}</h1>
+	<h1>E-mail: {{ thisuser.email }}</h1>
+	<h1>Date of birth: {{ thisuser.date_of_birth }}</h1>
 </div>
-<p class='title'>Author's blogs</p>
+<p class='title'>User's blogs</p>
 <div>
 	<table>
 		<thead>
@@ -35,7 +36,7 @@ Author {{author.first_name}}{{author.last_name}}
 	</table>
 </div>
 
-<p class='title'>Author's posts</p>
+<p class='title'>User's posts</p>
 <div>
 	<table>
 		<thead>

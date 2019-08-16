@@ -1,42 +1,38 @@
 {% extends 'blog/base.html' %}
 
 {% block title%}
-Profile {{profile.first_name}} {{profile.last_name}}
+{{ post.title }}
 {% endblock title %}
 
 {% block content %}
 <p class='title'>{{ post.title }}</p>
-<div>
+<div id='post'>
 	<b>{{ post.text }}</b>
 	<hr>
 	<small>
 		{{ post.date_published }}
 		<li>
-			<a href="{% url 'blog:author' post.author.id %}">AUTHOR</a>
+			<a href="{% url 'blog:user' post.author.id %}">AUTHOR</a>
 			{% if user.is_authenticated %}
-				{% if request.META['REMOTE_ADDR'] not in post.liked_users[post.id] %}
 				<a href="{% url 'blog:like_post' post.id%}" class='like'>LIKE</a>
-				{% else %}
-				<a href="{% url 'blog:unlike_post' post.id%}" class='like'>UNLIKE</a>
-				{% endif %}
 			{% endif %}
 		</li>
 	</small>
 </div>
-<hr>
-<p class='title'>Comments</p>
 {% if user.is_authenticated %}
-	<form action="{% url 'blog:post_comment' post.id %}" method="post">{% csrf_token %}
-		<input type='text'>
-		<input type="submit" value="Save"/>
+	<h1>Leave comment:</h1>
+	<form method="POST" id='comment'>{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
 	</form>
+	<hr>
 {% endif %}
-<div>
-
+<p class='title'>Comments</p>
+<div id='comment'>
 	<ul>
 		{% for comment in comments %}
 			<li>
-				<a href="{% url 'blog:author' comment.author.id %}">{{ comment.author }}</a>
+				<a href="{% url 'blog:user' comment.author.id %}">{{ comment.author }}</a>
 				{{ comment.date_published }}
 				{% if user.is_authenticated %}
 					<a href="{% url 'blog:like_comment' comment.id %}" class='like'>LIKE</a>

@@ -9,17 +9,40 @@ Author {{author.first_name}}{{author.last_name}}
 <ul>
     <a href="{% url 'blog:index-page' %}"><li class='list'><b>/</b> - all blogs</li></a>
     <br>
+
+    {% if blog %}
     <a href="{% url 'blog:blog' blog %}"><li class='list'><b>/blog/>blog_name<</b> - blog "blog_name"</li></a>
+    {% else %}
+    <li class='list'><b>/blog/>blog_name<</b> - blog "blog_name"</li>
+    {% endif %}
+
     <br>
     <a href="{% url 'blog:posts' %}"><li class='list'><b>/posts/</b> - all posts</li></a>
     <br>
+
+    {% if topic %}
     <a href="{% url 'blog:posts_topic' topic %}"><li class='list'><b>/posts/topic/>topic_name<</b> - all posts by topic</li></a>
+    {% else %}
+    <li class='list'><b>/posts/topic/>topic_name<</b> - all posts by topic</li>
+    {% endif %}
     <br>
+
+    {% if post %}
     <a href="{% url 'blog:post' post %}"><li class='list'><b>/post/>post_id<</b> - detailed post by id</li></a>
+    {% else %}
+    <li class='list'><b>/post/>post_id<</b> - detailed post by id</li>
+    {% endif %}
+    
     <br>
-    <a href="{% url 'blog:authors' %}"><li class='list'><b>/authors/</b> - all authors</li></a>
+    <a href="{% url 'blog:users' %}"><li class='list'><b>/authors/</b> - all users</li></a>
     <br>
-    <a href="{% url 'blog:author' author %}"><li class='list'><b>/authors/>author_id<</b> - detailed author information</li></a>
+
+    {% if author%}
+    <a href="{% url 'blog:user' author %}"><li class='list'><b>/authors/>author_id<</b> - detailed user information</li></a>
+    {% else %}
+    <li class='list'><b>/authors/>author_id<</b> - detailed user information</li>
+    {% endif %}
+
     <br>
     <a href="{% url 'blog:new_blog' %}"><li class='list'><b>/newblog/</b> - create new blog</li></a>
     <br>

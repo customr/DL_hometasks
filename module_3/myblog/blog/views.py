@@ -4,8 +4,8 @@ from django.utils import timezone
 from django.views.generic import edit
 from django.db.models import F
 
-from blog.models import Blog, Post, Comment
-from blog.forms import UserCreationForm
+from blog.models import MyUser, Blog, Post, Comment
+from blog.forms import UserCreationForm, BlogForm, PostForm, CommentForm
 
 
 class RegisterFormView(edit.FormView):
@@ -18,16 +18,36 @@ class RegisterFormView(edit.FormView):
         return super(RegisterFormView, self).form_valid(form)
 
 
-class NewBlog(edit.CreateView):
-	model = Blog
-	template_name = 'blog/new_blog.html'
-	fields = ['author', 'name']
 
 
-class NewPost(edit.CreateView):
-	model = Post
-	template_name = 'blog/new_post.html'
-	fields = ['blog', 'author', 'topic', 'title', 'text']
+
+def new_blog(request):
+	if request.method == 'POST':
+		form = BlogForm(request.POST)
+		if form.is_valid():
+			blog = form.save(commit=False)
+			blog.author = request.user
+			blog.date_published = timezone.now()
+			blog.save()
+			return HttpResponseRedirect(reverse('blog:blog', args=(blog.name, )))
+
+	else:
+		form = BlogForm()
+		return render(request, 'blog/new_blog.html', {'form': form})
+
+def new_post(request):
+	if request.method == 'POST':
+		form = PostForm(request.POST)
+		if form.is_valid():
+			post = form.save(commit=False)
+			post.author = request.user
+			post.date_published = timezone.now()
+			post.save()
+			return HttpResponseRedirect(reverse('blog:post', args=(post.id, )))
+
+	else:
+		form = PostForm()
+		return render(request, 'blog/new_post.html', {'form': form})
 
 
 def index(request):
@@ -47,11 +67,26 @@ def blog(request, blog_name):
 def post(request, post_id):
 	post = get_object_or_404(Post, pk=post_id)
 	comments = post.comment_set.all()
-	context = {
-		'post': post,
-		'comments': comments
+
+	if request.method == 'POST':
+		form = CommentForm(request.POST)
+		if form.is_valid():
+			comment = form.save(commit=False)
+			comment.post = post
+			comment.author = request.user
+			comment.date_published = timezone.now()
+			comment.save()
+			return HttpResponseRedirect(reverse('blog:post', args=(comment.post.id, )))
+
+	else:
+		form = CommentForm()
+		context = {
+			'post': post,
+			'comments': comments,
+			'form': form
 		}
-	return render(request, 'blog/post_detail.html', context)
+		return render(request, 'blog/post_detail.html', context)
+
 
 
 def get_posts(request, topic=None):
@@ -64,31 +99,43 @@ def get_posts(request, topic=None):
 		}
 	return render(request, 'blog/post.html', context)
 
-def author(request, author_id):
-	author = get_object_or_404(Author, pk=author_id)
-	blogs = Blog.objects.filter(author=author)
-	posts = Post.objects.filter(author=author)
+def user(request, user_id):
+	user = get_object_or_404(MyUser, pk=user_id)
+	blogs = Blog.objects.filter(author=user)
+	posts = Post.objects.filter(author=user)
 
 	context = {
-		'author': author,
+		'thisuser': user,
 		'posts': posts,
 		'blogs': blogs
 		}
-	return render(request, 'blog/author_detail.html', context)
+	return render(request, 'blog/user_detail.html', context)
 
-def get_authors(request):
-	authors = Author.objects.all()
-	context = {'authors': authors}
-	return render(request, 'blog/author.html', context)
+def get_users(request):
+	users = MyUser.objects.all()
+	context = {'users': users}
+	return render(request, 'blog/users.html', context)
 
 def help(request):
 	blog = Blog.objects.order_by("?").first()
 	post = Post.objects.order_by("?").first()
-	topic = post.topic
-	author = post.author.id
+	topic = None
+	author = None
+
+	if not blog:
+		blog = None
+
+	if post:
+		topic = post.topic
+		author = post.author.id
+		post = post.id
+
+	else:
+		post = None
+
 	context = {
 		'blog': blog.name,
-		'post': post.id,
+		'post': post,
 		'topic': topic,
 		'author': author
 	}
@@ -96,6 +143,9 @@ def help(request):
 
 def register_success(request):
 	return render(request, 'registration/registration_success.html', {})
+
+
+
 
 
 #`````````````````````````````ACTIONS```````````````````````````````````
@@ -130,8 +180,6 @@ def like_comment(request, comment_id):
 
 	return HttpResponseRedirect(reverse('blog:post', args=(comment.post.id, )))
 
-def post_comment(request):
-	pass
 
 def unlike_post(request):
 	pass

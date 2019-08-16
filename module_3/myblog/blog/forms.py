@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
-from blog.models import MyUser
+from blog.models import MyUser, Blog, Post, Comment
 
 class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
@@ -35,3 +35,22 @@ class UserChangeForm(forms.ModelForm):
 
     def clean_password(self):
         return self.initial["password"]
+
+
+class BlogForm(forms.ModelForm):
+
+    class Meta:
+        model = Blog
+        fields = ('name',)
+
+class PostForm(forms.ModelForm):
+
+    class Meta:
+        model = Post
+        fields = ('blog', 'topic', 'title', 'text')
+
+class CommentForm(forms.ModelForm):
+
+    class Meta:
+        model = Comment
+        fields = ('text',)

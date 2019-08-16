@@ -7,7 +7,7 @@ Author {{author.first_name}}{{author.last_name}}
 {% block content %}
 <div>
 	<h1>Blog name: {{ blog.name }}</h1>
-	<h1>Blog author: <a href="{% url 'blog:author' blog.author.id %}">{{ blog.author }}</a></h1>
+	<h1>Blog author: <a href="{% url 'blog:user' blog.author.id %}">{{ blog.author }}</a></h1>
 	<h1>Rating: {{ blog.rating }}</h1>
 </div>
 <p class='title'>Blog posts</p>

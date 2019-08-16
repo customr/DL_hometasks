@@ -82,7 +82,7 @@ class MyUser(AbstractBaseUser):
 
 class Blog(models.Model):
 	author = models.ForeignKey(MyUser, on_delete=models.CASCADE, blank=True)
-	name = models.CharField('Name', max_length=50, blank=True)
+	name = models.CharField('Name', max_length=50, blank=True, unique=True)
 	rating = models.IntegerField('Rating', default=0)
 
 	def __str__(self):
