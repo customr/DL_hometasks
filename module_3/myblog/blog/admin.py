@@ -31,12 +31,12 @@ class UserAdmin(BaseUserAdmin):
 
 class BlogAdmin(admin.ModelAdmin):
 	fields = ['author', 'name']
-	list_display = ['rating']
+	list_display = ['name', 'author', 'rating']
 	list_filter = ['rating']
 
 class PostAdmin(admin.ModelAdmin):
 	fields = ['topic', 'rating', 'blog', 'author']
-	list_display = ['rating', 'blog', 'topic']
+	list_display = ['rating', 'blog', 'topic', 'title', 'author']
 	list_filter = ['rating', 'blog', 'topic']
 
 class CommentAdmin(admin.ModelAdmin):

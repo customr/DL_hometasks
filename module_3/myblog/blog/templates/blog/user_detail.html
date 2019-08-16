@@ -59,7 +59,7 @@ User {{thisuser.first_name}} {{thisuser.last_name}}
 				<th>{{ post.title }}</th>
 				<th>{{ post.text|slice:25 }}</th>
 				<th>{{ post.date_published }}</th>
-				<th><a href="{% url 'blog:post' author.id %}">Detail</a></th>
+				<th><a href="{% url 'blog:post' post.id %}">Detail</a></th>
 			</tr>
 		{% endfor %}
 		</tbody>

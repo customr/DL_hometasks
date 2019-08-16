@@ -43,13 +43,21 @@ class BlogForm(forms.ModelForm):
         model = Blog
         fields = ('name',)
 
+
 class PostForm(forms.ModelForm):
+
+    text = forms.CharField(label='Body:', max_length=5500, 
+        widget=forms.Textarea(attrs={'rows':'15 ', 'cols':'180'}))
 
     class Meta:
         model = Post
         fields = ('blog', 'topic', 'title', 'text')
 
+
 class CommentForm(forms.ModelForm):
+
+    text = forms.CharField(label='Leave comment:', max_length=1000, 
+        widget=forms.Textarea(attrs={'rows':'3', 'cols':'180'}))
 
     class Meta:
         model = Comment

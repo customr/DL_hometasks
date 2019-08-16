@@ -16,6 +16,21 @@ h1{
 	font-size: 20px;
 }
 
+input{
+	width: 200px;
+}
+
+textarea{
+	font-weight: bold;
+	box-sizing: border-box;
+	font-size: 15px;
+	width: 100%;
+	overflow: hidden;
+	padding: 0;
+	outline: none;
+	background-color: #eeeeee;
+}
+
 form{
 	margin: 5px;
 	padding: 10px;
@@ -250,6 +265,11 @@ a.like:hover{
 	color: white;
 }
 
+.unlike{
+	background: white;
+	color: red;
+}
+
 #comment{
 	background: white;
 	margin: 0;
@@ -258,4 +278,5 @@ a.like:hover{
 
 #post{
 	background: #fffed4;
+	margin-bottom: 50px;
 }

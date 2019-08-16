@@ -37,7 +37,7 @@ Author {{author.first_name}}{{author.last_name}}
     <a href="{% url 'blog:users' %}"><li class='list'><b>/authors/</b> - all users</li></a>
     <br>
 
-    {% if author%}
+    {% if author %}
     <a href="{% url 'blog:user' author %}"><li class='list'><b>/authors/>author_id<</b> - detailed user information</li></a>
     {% else %}
     <li class='list'><b>/authors/>author_id<</b> - detailed user information</li>
@@ -48,11 +48,20 @@ Author {{author.first_name}}{{author.last_name}}
     <br>
     <a href="{% url 'blog:new_post' %}"><li class='list'><b>/newpost/</b> - create new post</li></a>
     <br>
+
+    {% if blog %}
+    <a href="{% url 'blog:new_post' blog%}"><li class='list'><b>newpost/>blog_name<</b> - create new post for blog</li></a>
+    {% else %}
+    <li class='list'><b>newpost/>blog_name</</b> - create new post for blog</li>
+    {% endif %}
+    <br>
+    <a href="{% url 'login' %}"><li class='list'><b>/accounts/login/</b> - log in</li></a>
+    <br>
     <a href="{% url 'blog:register' %}"><li class='list'><b>/register/</b> - registration</li></a>
     <br>
     <a href="{% url 'blog:success' %}"><li class='list'><b>/register/success/</b> - register success page</li></a>
     <br>
-    <li class='list'><b>/post/comment/create/>post_id/</b> - create new comment</li>
+    <li class='list'><b>/post/comment/create/>post_id<</b> - create new comment</li>
     <br>
     <li class='list'><b>/post/>post_id/like/</b> - like a post</li>
     <br>

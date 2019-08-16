@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.utils import timezone
 from django.views.generic import edit
 from django.db.models import F
+from django.contrib.auth.decorators import login_required
 
 from blog.models import MyUser, Blog, Post, Comment
 from blog.forms import UserCreationForm, BlogForm, PostForm, CommentForm
@@ -20,7 +21,7 @@ class RegisterFormView(edit.FormView):
 
 
 
-
+@login_required(login_url='login')
 def new_blog(request):
 	if request.method == 'POST':
 		form = BlogForm(request.POST)
@@ -35,18 +36,27 @@ def new_blog(request):
 		form = BlogForm()
 		return render(request, 'blog/new_blog.html', {'form': form})
 
-def new_post(request):
+@login_required(login_url='login')
+def new_post(request, blog_name=None):
 	if request.method == 'POST':
 		form = PostForm(request.POST)
 		if form.is_valid():
 			post = form.save(commit=False)
+
+			if blog_name:
+				post.blog = get_object_or_404(Blog, name__iexact=blog_name)
+
 			post.author = request.user
 			post.date_published = timezone.now()
 			post.save()
 			return HttpResponseRedirect(reverse('blog:post', args=(post.id, )))
 
 	else:
-		form = PostForm()
+		if blog_name:
+			form = PostForm(initial={'blog': get_object_or_404(Blog, name__iexact=blog_name)})
+		else:
+			form = PostForm()
+			
 		return render(request, 'blog/new_post.html', {'form': form})
 
 
@@ -91,8 +101,10 @@ def post(request, post_id):
 
 def get_posts(request, topic=None):
 	posts = Post.objects.all()
+	
 	if topic is not None:
 		posts = posts.filter(topic__iexact=topic)
+
 	context = {
 		'posts': posts,
 		'topic': topic
@@ -141,51 +153,59 @@ def help(request):
 	}
 	return render(request, 'blog/help.html', context)
 
+@login_required(login_url='accounts/login/')
 def register_success(request):
 	return render(request, 'registration/registration_success.html', {})
 
+@login_required(login_url='accounts/login/')
+def logout(request):
+	return render(request, 'registration/logout.html', {})
 
 
 
 
 #`````````````````````````````ACTIONS```````````````````````````````````
+@login_required(login_url='accounts/login/')
 def like_post(request, post_id):
 	post = get_object_or_404(Post, pk=post_id)
 
-	try:
-		post.liked_users[post_id]
-
-	except Exception:
-		post.liked_users[post_id] = {}
-
-	finally:	
-		if request.META['REMOTE_ADDR'] not in post.liked_users[post_id].values():
-			post.liked_users[post_id][f'{post.id}'] = request.META['REMOTE_ADDR']
-			Post.objects.filter(pk=post_id).update(rating=F('rating') + 1)
+	if request.META['REMOTE_ADDR'] not in post.liked_users:
+		post.liked_users.append(request.META['REMOTE_ADDR'])
+		Post.objects.filter(pk=post.id).update(rating=F('rating') + 1)
+		Blog.objects.filter(pk=post.blog.id).update(rating=F('rating') + 1)
 
 	return HttpResponseRedirect(reverse('blog:post', args=(post.id, )))
 
+@login_required(login_url='accounts/login/')
 def like_comment(request, comment_id):
 	comment = get_object_or_404(Comment, pk=comment_id)
-	try: 
-		comment.liked_users[comment_id]
-	
-	except Exception:
-		comment.liked_users[comment_id] = {}
 
-	finally:
-		if request.META['REMOTE_ADDR'] not in comment.liked_users[comment_id].values():
-			comment.liked_users[comment_id][f'{comment.id}'] = request.META['REMOTE_ADDR']
-			Comment.objects.filter(pk=comment_id).update(rating=F('rating') + 1)
+	if request.META['REMOTE_ADDR'] not in comment.liked_users:
+		comment.liked_users.append(request.META['REMOTE_ADDR'])
+		Comment.objects.filter(pk=comment.id).update(rating=F('rating') + 1)
+		Blog.objects.filter(pk=comment.post.blog.id).update(rating=F('rating') + 1)
 
 	return HttpResponseRedirect(reverse('blog:post', args=(comment.post.id, )))
 
+@login_required(login_url='accounts/login/')
+def unlike_post(request, post_id):
+	post = get_object_or_404(Post, pk=post_id)
 
-def unlike_post(request):
-	pass
+	if request.META['REMOTE_ADDR'] in post.liked_users:
+		post.liked_users.remove(request.META['REMOTE_ADDR'])
+		Post.objects.filter(pk=post.id).update(rating=F('rating') - 1)
+		Blog.objects.filter(pk=post.blog.id).update(rating=F('rating') - 1)
 
-def unlike_comment(request):
-	pass
+	return HttpResponseRedirect(reverse('blog:post', args=(post.id, )))
 
-def logout(request):
-	return render(request, 'registration/logout.html', {})
+
+@login_required(login_url='accounts/login/')
+def unlike_comment(request, comment_id):
+	comment = get_object_or_404(Comment, pk=comment_id)
+
+	if request.META['REMOTE_ADDR'] in comment.liked_users:
+		comment.liked_users.remove(request.META['REMOTE_ADDR'])
+		Comment.objects.filter(pk=comment.id).update(rating=F('rating') - 1)
+		Blog.objects.filter(pk=comment.post.blog.id).update(rating=F('rating') - 1)
+
+	return HttpResponseRedirect(reverse('blog:post', args=(post.id, )))

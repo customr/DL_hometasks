@@ -14,6 +14,7 @@ urlpatterns = [
 	path('help/', views.help, name='help'),
 	#````````````````````````CREATION```````````````````````````
 	path('newpost/', views.new_post, name='new_post'),
+	path('newpost/<str:blog_name>/', views.new_post, name='new_post'),
 	path('newblog/', views.new_blog, name='new_blog'),
 	#````````````````````````REGISTRATION``````````````````````
 	path('register/', views.RegisterFormView.as_view(), name='register'),

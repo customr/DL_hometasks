@@ -75,6 +75,9 @@ class MyUser(AbstractBaseUser):
 	def has_module_perms(self, app_label):
 		return True
 
+	def get_absolute_url(self):
+		return reverse('blog:user', args=[str(self.id)])
+
 	@property
 	def is_staff(self):
 		return self.is_admin
@@ -96,12 +99,12 @@ class Post(models.Model):
 	blog = models.ForeignKey(Blog, on_delete=models.CASCADE, blank=True)
 	author = models.ForeignKey(MyUser, on_delete=models.CASCADE, blank=True)
 	topic = models.CharField('Topic', max_length=50, blank=True)
-	title = models.CharField('Title', max_length=50, blank=True)
-	text = models.CharField('Text', max_length=250, blank=True)
+	title = models.CharField('Title', max_length=5500, blank=True)
+	text = models.TextField('Text', max_length=00, blank=True)
 	rating = models.IntegerField('Rating', default=0)
 	date_published = models.DateTimeField('Date published', default=timezone.now, blank=True)
 
-	liked_users = {}
+	liked_users = []
 
 	def __str__(self):
 		return f'#{self.id} {self.title}'
@@ -113,11 +116,14 @@ class Post(models.Model):
 class Comment(models.Model):
 	author = models.ForeignKey(MyUser, on_delete=models.CASCADE, blank=True)
 	post = models.ForeignKey(Post, on_delete=models.CASCADE, blank=True)
-	text = models.CharField('Text', max_length=150, blank=True)
+	text = models.TextField('Text', max_length=1000, blank=True)
 	rating = models.IntegerField('Rating', default=0, blank=True)
 	date_published = models.DateTimeField('Date published', default=timezone.now, blank=True)
 
-	liked_users = {}
+	liked_users = []
 
 	def __str__(self):
 		return f'Comment {self.id}'
+
+	def get_absolute_url(self):
+		return reverse('blog:post', args=[str(self.post.id)])
