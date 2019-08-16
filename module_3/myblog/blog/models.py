@@ -2,25 +2,87 @@ import datetime
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
+from django.db import models
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 
-class Author(models.Model):
-	first_name = models.CharField('First name', max_length=25)
-	last_name = models.CharField('Last name', max_length=35)
-	email = models.CharField('Email', max_length=50)
-	date_of_birth = models.DateField('Date of birth', max_length=8)
-	rating = models.IntegerField('Rating', default=0)
+
+class MyUserManager(BaseUserManager):
+	def create_user(self, username, first_name, last_name, email, date_of_birth, password=None):
+		if not email:
+			raise ValueError('Users must have an email address')
+
+		if not username:
+			raise ValueError('User must have an username')
+
+		if not first_name or not last_name:
+			raise ValueError('Users must have a fullname')
+
+		if not password:
+			raise ValueError('Users must have a password')
+
+		user = self.model(
+			username=username,
+			first_name=first_name,
+			last_name=last_name,
+			email=self.normalize_email(email),
+			date_of_birth=date_of_birth,
+		)
+
+		user.set_password(password)
+		user.save(using=self._db)
+		return user
+
+	def create_superuser(self, username, first_name, last_name, email, date_of_birth, password):
+		user = self.create_user(
+			username=username,
+			first_name=first_name,
+ 			last_name=last_name,
+			email=email,
+			password=password,
+			date_of_birth=date_of_birth,
+		)
+		user.is_admin = True
+		user.save(using=self._db)
+		return user
+
+
+class MyUser(AbstractBaseUser):
+	username = models.CharField('username', max_length=50, unique=True)
+	first_name = models.CharField('first name', max_length=50)
+	last_name = models.CharField('last name', max_length=50)
+	email = models.EmailField(
+		verbose_name='email address',
+		max_length=255,
+		unique=True,
+	)
+	date_of_birth = models.DateField()
+	is_active = models.BooleanField(default=True)
+	is_admin = models.BooleanField(default=False)
+
+	objects = MyUserManager()
+
+	USERNAME_FIELD = 'username'
+	EMAIL_FIELD = 'email'
+	REQUIRED_FIELDS = ['first_name', 'last_name', 'email', 'date_of_birth']
 
 	def __str__(self):
-		return f'#{self.id} {self.first_name} {self.last_name}'
+		return self.username
 
-	def get_absolute_url(self):
-		return reverse('blog:author', args=[str(self.id)])
+	def has_perm(self, perm, obj=None):
+		return True
+
+	def has_module_perms(self, app_label):
+		return True
+
+	@property
+	def is_staff(self):
+		return self.is_admin
 
 
 class Blog(models.Model):
-	author = models.ForeignKey(Author, on_delete=models.CASCADE)
-	name = models.CharField('Name', max_length=50)
+	author = models.ForeignKey(MyUser, on_delete=models.CASCADE, blank=True)
+	name = models.CharField('Name', max_length=50, blank=True)
 	rating = models.IntegerField('Rating', default=0)
 
 	def __str__(self):
@@ -31,17 +93,15 @@ class Blog(models.Model):
 
 
 class Post(models.Model):
-	blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
-	author = models.ForeignKey(Author, on_delete=models.CASCADE)
-	topic = models.CharField('Topic', max_length=50)
-	title = models.CharField('Title', max_length=50)
-	text = models.CharField('Text', max_length=250)
+	blog = models.ForeignKey(Blog, on_delete=models.CASCADE, blank=True)
+	author = models.ForeignKey(MyUser, on_delete=models.CASCADE, blank=True)
+	topic = models.CharField('Topic', max_length=50, blank=True)
+	title = models.CharField('Title', max_length=50, blank=True)
+	text = models.CharField('Text', max_length=250, blank=True)
 	rating = models.IntegerField('Rating', default=0)
-	date_published = models.DateTimeField('Date published', default=timezone.now)
+	date_published = models.DateTimeField('Date published', default=timezone.now, blank=True)
 
-	def was_published_recently(self):
-		now = timezone.now()
-		return now - datetime.timedelta(days=-1) <= self.date_published <= now
+	liked_users = {}
 
 	def __str__(self):
 		return f'#{self.id} {self.title}'
@@ -49,41 +109,15 @@ class Post(models.Model):
 	def get_absolute_url(self):
 		return reverse('blog:post', args=[str(self.id)])
 
-	@property
-	def liked_users(self):
-		return self._liked_users
-
-	@liked_users.setter
-	def liked_users(self, value):
-		assert self._liked_users - value == 1
-
-		self._liked_users = value
-
-	@liked_users.getter
-	def liked_users(self):
-		return self._liked_users
-
 
 class Comment(models.Model):
-	author = models.ForeignKey(Author, on_delete=models.CASCADE)
-	post = models.ForeignKey(Post, on_delete=models.CASCADE)
-	text = models.CharField('Text', max_length=150)
-	rating = models.IntegerField('Rating', default=0)
-	date_published = models.DateTimeField('Date published', default=timezone.now)
+	author = models.ForeignKey(MyUser, on_delete=models.CASCADE, blank=True)
+	post = models.ForeignKey(Post, on_delete=models.CASCADE, blank=True)
+	text = models.CharField('Text', max_length=150, blank=True)
+	rating = models.IntegerField('Rating', default=0, blank=True)
+	date_published = models.DateTimeField('Date published', default=timezone.now, blank=True)
 
-	@property
-	def liked_users(self):
-		return self._liked_users
-
-	@liked_users.setter
-	def liked_users(self, value):
-		assert self._liked_users - value == 1
-
-		self._liked_users = value
-
-	@liked_users.getter
-	def liked_users(self):
-		return self._liked_users
+	liked_users = {}
 
 	def __str__(self):
 		return f'Comment {self.id}'

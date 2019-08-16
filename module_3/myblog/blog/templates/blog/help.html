@@ -21,10 +21,23 @@ Author {{author.first_name}}{{author.last_name}}
     <br>
     <a href="{% url 'blog:author' author %}"><li class='list'><b>/authors/>author_id<</b> - detailed author information</li></a>
     <br>
-    <a href="{% url 'blog:new_author' %}"><li class='list'><b>/newauthor/</b> - register new author</li></a>
-    <br>
     <a href="{% url 'blog:new_blog' %}"><li class='list'><b>/newblog/</b> - create new blog</li></a>
     <br>
     <a href="{% url 'blog:new_post' %}"><li class='list'><b>/newpost/</b> - create new post</li></a>
+    <br>
+    <a href="{% url 'blog:register' %}"><li class='list'><b>/register/</b> - registration</li></a>
+    <br>
+    <a href="{% url 'blog:success' %}"><li class='list'><b>/register/success/</b> - register success page</li></a>
+    <br>
+    <li class='list'><b>/post/comment/create/>post_id/</b> - create new comment</li>
+    <br>
+    <li class='list'><b>/post/>post_id/like/</b> - like a post</li>
+    <br>
+    <li class='list'><b>/post/>post_id/unlike/</b> - unlike the post</li>
+    <br>
+    <li class='list'><b>/post/comment/>comment_id/like</b> - like a comment</li>
+    <br>
+    <li class='list'><b>/post/comment/>comment_id/unlike</b> - unlike the comment</li>
+
 </ul>
 {% endblock content %}

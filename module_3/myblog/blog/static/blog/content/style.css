@@ -221,7 +221,7 @@ li.actions a:hover {
 }
 
 li.list{
-	font-size: 25px;
+	font-size: 18px;
 }
 
 ul.list a {
@@ -245,3 +245,7 @@ div.list a{
 	margin-left: 15px; 
 }
 
+a.like:hover{
+	background: red;
+	color: white;
+}

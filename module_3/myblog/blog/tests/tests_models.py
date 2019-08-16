@@ -30,17 +30,35 @@ def create_post(**kw):
 	else:
 		return posts[0]
 
+def create_comment(**kw):
+	comments = Comment.objects.all()
 
-class PostTest(TestCase):
+	if len(comments) == 0 or len(kw) != 0:
+		return Comment(create_author(), 'test', 'test')
+	else:
+		return comments[0]
 
-	def test_was_published_recently(self):
-		author = create_author()
-		blog = create_blog()
 
-		post_old = create_post(date_published=timezone.now() + datetime.timedelta(days=-30))
-		post = create_post()
-		post_future = create_post(date_published=timezone.now() + datetime.timedelta(days=30))
+class AuthorModelTest(TestCase):
+	author1 = create_author()
+	author2 = create_author(rating=5)
 
-		self.assertEqual(post_old.was_published_recently(), False)
-		self.assertEqual(post.was_published_recently(), True)
-		self.assertEqual(post_future.was_published_recently(), False)
+	self.assertEqual(author2.rating, 5)
+
+class BlogModelTest(TestCase):
+	blog1 = create_blog()
+	blog2 = create_blog(rating=5)
+
+	self.assertEqual(blog2.rating, 5)
+
+class PostModelTest(TestCase):
+	post1 = create_post()
+	post2 = create_post(rating=5)
+
+	self.assertEqual(post2.rating, 5)
+
+class CommentModelTest(TestCase):
+	comment1 = create_comment()
+	comment2 = create_comment(rating=5)
+
+	self.assertEqual(comment2.rating, 5)
